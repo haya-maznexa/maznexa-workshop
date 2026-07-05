@@ -13,7 +13,7 @@ import {
   BENEFITS, KPI_STEPS, INTERPRET_STEPS, REPORTING_PRACTICES,
   TOOLS_TABLE, TOOL_DETAILS, SECTIONS,
   DASHBOARD_EXAMPLES, BUDGET_TOTAL, BUDGET_ONLINE, BUDGET_OFFLINE,
-  BUDGET_BY_BRAND, BUDGET_BY_MONTH, BUDGET_BY_PLATFORM, INTEGRATIONS,
+  BUDGET_BY_BRAND, BUDGET_BY_MONTH, BUDGET_BY_PLATFORM, TOOL_INTEGRATIONS,
 } from "./data";
 import { ToolLogo } from "./ToolLogo";
 import { IntegrationIcon } from "./IntegrationIcon";
@@ -562,35 +562,39 @@ export default function Workshop() {
           ))}
         </div>
 
-        {/* Integrations */}
+        {/* Integrations — per tool */}
         <div className="mt-16">
           <Reveal>
             <div className="max-w-2xl mb-8">
               <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-                Platforms we integrate with
+                What each tool integrates with
               </h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                These tools pull data automatically from the platforms and sources below — so every
+                Each platform pulls data automatically from the apps and sources below — so every
                 dashboard stays in sync without manual exports.
               </p>
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {INTEGRATIONS.map((cat, ci) => (
-              <Reveal key={cat.group} delay={ci * 0.06}>
-                <div className="h-full rounded-2xl border border-border bg-card p-5 shadow-card">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#5053C8] dark:text-[#BE98FF] mb-4">
-                    {cat.group}
-                  </p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {TOOL_INTEGRATIONS.map((t, ti) => (
+              <Reveal key={t.tool} delay={ti * 0.08}>
+                <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card">
+                  <div className="flex items-center gap-2.5 mb-1">
+                    <span className="h-9 min-w-[52px] px-2.5 rounded-lg bg-white border border-border flex items-center justify-center shrink-0">
+                      <ToolLogo tool={t.tool} className="h-4" />
+                    </span>
+                    <h4 className="font-bold text-foreground">{t.tool}</h4>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-4 leading-relaxed">{t.note}</p>
                   <div className="flex flex-wrap gap-2">
-                    {cat.items.map((it) => (
+                    {t.items.map((it) => (
                       <span
                         key={it.name}
-                        className="inline-flex items-center gap-1.5 h-8 pl-1.5 pr-3 rounded-lg border border-border bg-muted/40 text-xs font-medium text-foreground"
+                        className="inline-flex items-center gap-1.5 h-8 pl-1.5 pr-2.5 rounded-lg border border-border bg-muted/40 text-xs font-medium text-foreground"
                       >
-                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-border shrink-0">
-                          <IntegrationIcon icon={it.icon} className="w-3.5 h-3.5" />
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-md bg-white border border-border shrink-0">
+                          <IntegrationIcon icon={it.icon} className="w-3 h-3" />
                         </span>
                         {it.name}
                       </span>

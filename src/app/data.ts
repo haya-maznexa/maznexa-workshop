@@ -230,55 +230,72 @@ export const DASHBOARD_EXAMPLES = [
   },
 ];
 
-// ── Platforms & data sources we integrate with ──
-export const INTEGRATIONS: { group: string; items: { name: string; icon: string }[] }[] = [
+// ── What each tool can integrate with (representative connectors) ──
+export const TOOL_INTEGRATIONS: {
+  tool: string;
+  note: string;
+  items: { name: string; icon: string }[];
+}[] = [
   {
-    group: "Advertising",
+    tool: "Power BI",
+    note: "100+ data connectors — from spreadsheets to enterprise databases and cloud apps.",
     items: [
-      { name: "Google Ads", icon: "google" },
-      { name: "Meta Ads", icon: "meta" },
-      { name: "TikTok Ads", icon: "tiktok" },
-      { name: "Snapchat Ads", icon: "snapchat" },
-      { name: "X Ads", icon: "x" },
-      { name: "LinkedIn Ads", icon: "linkedin" },
-    ],
-  },
-  {
-    group: "Social & Content",
-    items: [
-      { name: "Instagram", icon: "instagram" },
-      { name: "Facebook", icon: "facebook" },
-      { name: "TikTok", icon: "tiktok" },
-      { name: "YouTube", icon: "youtube" },
-      { name: "X (Twitter)", icon: "x" },
-      { name: "Pinterest", icon: "pinterest" },
-    ],
-  },
-  {
-    group: "Analytics & Search",
-    items: [
-      { name: "Google Analytics 4", icon: "google" },
-      { name: "Search Console", icon: "search" },
-      { name: "YouTube Analytics", icon: "youtube" },
-    ],
-  },
-  {
-    group: "Data Sources",
-    items: [
-      { name: "Google Sheets", icon: "sheets" },
       { name: "Excel", icon: "excel" },
-      { name: "CSV", icon: "csv" },
-      { name: "Databases", icon: "database" },
+      { name: "Google Sheets", icon: "sheets" },
+      { name: "CSV / JSON", icon: "csv" },
+      { name: "SQL Server", icon: "microsoft" },
+      { name: "MySQL", icon: "database" },
+      { name: "PostgreSQL", icon: "database" },
+      { name: "Azure", icon: "microsoft" },
+      { name: "SharePoint", icon: "microsoft" },
+      { name: "Dynamics 365", icon: "microsoft" },
+      { name: "Salesforce", icon: "salesforce" },
+      { name: "Google Analytics", icon: "google" },
+      { name: "BigQuery", icon: "google" },
+      { name: "Snowflake", icon: "database" },
+      { name: "Web / REST API", icon: "api" },
     ],
   },
   {
-    group: "E-commerce & CRM",
+    tool: "Zoho Analytics",
+    note: "500+ connectors across the Zoho suite, marketing, finance and databases.",
     items: [
-      { name: "Shopify", icon: "shopify" },
-      { name: "Salla", icon: "cart" },
-      { name: "HubSpot", icon: "hubspot" },
+      { name: "Zoho CRM", icon: "crm" },
+      { name: "Zoho Books", icon: "books" },
+      { name: "Zoho Desk", icon: "desk" },
+      { name: "Google Ads", icon: "google" },
+      { name: "Google Analytics", icon: "google" },
+      { name: "Meta Ads", icon: "meta" },
       { name: "Salesforce", icon: "salesforce" },
-      { name: "WhatsApp Business", icon: "whatsapp" },
+      { name: "HubSpot", icon: "hubspot" },
+      { name: "Mailchimp", icon: "mailchimp" },
+      { name: "QuickBooks", icon: "invoice" },
+      { name: "Shopify", icon: "shopify" },
+      { name: "Stripe", icon: "stripe" },
+      { name: "Microsoft Ads", icon: "microsoft" },
+      { name: "Google Sheets", icon: "sheets" },
+    ],
+  },
+  {
+    tool: "Agency Analytics",
+    note: "80+ marketing integrations built for agencies and client reporting.",
+    items: [
+      { name: "Google Analytics", icon: "google" },
+      { name: "Google Ads", icon: "google" },
+      { name: "Search Console", icon: "search" },
+      { name: "Google Business", icon: "google" },
+      { name: "Meta Ads", icon: "meta" },
+      { name: "Instagram", icon: "instagram" },
+      { name: "TikTok Ads", icon: "tiktok" },
+      { name: "LinkedIn", icon: "linkedin" },
+      { name: "X (Twitter)", icon: "x" },
+      { name: "Snapchat", icon: "snapchat" },
+      { name: "YouTube", icon: "youtube" },
+      { name: "Microsoft Ads", icon: "microsoft" },
+      { name: "Mailchimp", icon: "mailchimp" },
+      { name: "Shopify", icon: "shopify" },
+      { name: "SEMrush", icon: "seo" },
+      { name: "CallRail", icon: "phone" },
     ],
   },
 ];

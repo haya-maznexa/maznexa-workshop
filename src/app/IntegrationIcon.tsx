@@ -2,8 +2,12 @@ import {
   FaGoogle, FaMeta, FaFacebook, FaInstagram, FaTiktok, FaSnapchat,
   FaXTwitter, FaLinkedin, FaYoutube, FaPinterest, FaWhatsapp,
   FaShopify, FaSalesforce, FaHubspot, FaFileCsv, FaDatabase, FaCartShopping,
+  FaMicrosoft, FaStripe, FaMailchimp,
 } from "react-icons/fa6";
-import { Search, FileSpreadsheet, Table } from "lucide-react";
+import {
+  Search, FileSpreadsheet, Table, Globe, Phone, Users, BookOpen,
+  Headphones, Receipt, TrendingUp,
+} from "lucide-react";
 
 const MAP: Record<string, { icon: React.ElementType; color: string }> = {
   google: { icon: FaGoogle, color: "#4285F4" },
@@ -26,11 +30,23 @@ const MAP: Record<string, { icon: React.ElementType; color: string }> = {
   database: { icon: FaDatabase, color: "#5053C8" },
   sheets: { icon: Table, color: "#34A853" },
   search: { icon: Search, color: "#458CF5" },
+  microsoft: { icon: FaMicrosoft, color: "#00A4EF" },
+  stripe: { icon: FaStripe, color: "#635BFF" },
+  mailchimp: { icon: FaMailchimp, color: "#FFE01B" },
+  api: { icon: Globe, color: "#5053C8" },
+  phone: { icon: Phone, color: "#5053C8" },
+  crm: { icon: Users, color: "#E42527" },
+  books: { icon: BookOpen, color: "#089949" },
+  desk: { icon: Headphones, color: "#226DB4" },
+  invoice: { icon: Receipt, color: "#2CA01C" },
+  seo: { icon: TrendingUp, color: "#FF642D" },
 };
 
 export function IntegrationIcon({ icon, className = "w-4 h-4" }: { icon: string; className?: string }) {
   const def = MAP[icon] ?? { icon: Search, color: "#5053C8" };
   const Icon = def.icon;
-  const color = def.color === "#000000" ? "hsl(var(--foreground))" : def.color;
+  let color = def.color;
+  if (color === "#000000") color = "hsl(var(--foreground))";
+  else if (color === "#FFE01B") color = "#C9A800"; // Mailchimp yellow → readable on white
   return <Icon className={className} style={{ color }} />;
 }
