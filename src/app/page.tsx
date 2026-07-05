@@ -13,9 +13,10 @@ import {
   BENEFITS, KPI_STEPS, INTERPRET_STEPS, REPORTING_PRACTICES,
   TOOLS_TABLE, TOOL_DETAILS, SECTIONS,
   DASHBOARD_EXAMPLES, BUDGET_TOTAL, BUDGET_ONLINE, BUDGET_OFFLINE,
-  BUDGET_BY_BRAND, BUDGET_BY_MONTH, BUDGET_BY_PLATFORM,
+  BUDGET_BY_BRAND, BUDGET_BY_MONTH, BUDGET_BY_PLATFORM, INTEGRATIONS,
 } from "./data";
 import { ToolLogo } from "./ToolLogo";
+import { IntegrationIcon } from "./IntegrationIcon";
 
 function fmtSAR(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`;
@@ -327,9 +328,9 @@ export default function Workshop() {
         <SectionHeading
           eyebrow="05 · In practice"
           title="Dashboard examples"
-          subtitle="Real dashboards we build and monitor — each one designed around a specific audience and decision."
+          subtitle="Real dashboards we build and monitor — each one designed around a specific audience and decision, built in the tool that fits it best."
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {DASHBOARD_EXAMPLES.map((d, i) => (
             <Reveal key={d.title} delay={i * 0.08}>
               <div className="group h-full rounded-2xl border border-border bg-card overflow-hidden shadow-card hover:shadow-card-hover transition-all">
@@ -559,6 +560,46 @@ export default function Workshop() {
               </div>
             </Reveal>
           ))}
+        </div>
+
+        {/* Integrations */}
+        <div className="mt-16">
+          <Reveal>
+            <div className="max-w-2xl mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                Platforms we integrate with
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                These tools pull data automatically from the platforms and sources below — so every
+                dashboard stays in sync without manual exports.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {INTEGRATIONS.map((cat, ci) => (
+              <Reveal key={cat.group} delay={ci * 0.06}>
+                <div className="h-full rounded-2xl border border-border bg-card p-5 shadow-card">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#5053C8] dark:text-[#BE98FF] mb-4">
+                    {cat.group}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.items.map((it) => (
+                      <span
+                        key={it.name}
+                        className="inline-flex items-center gap-1.5 h-8 pl-1.5 pr-3 rounded-lg border border-border bg-muted/40 text-xs font-medium text-foreground"
+                      >
+                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-white border border-border shrink-0">
+                          <IntegrationIcon icon={it.icon} className="w-3.5 h-3.5" />
+                        </span>
+                        {it.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

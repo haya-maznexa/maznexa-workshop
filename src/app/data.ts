@@ -201,14 +201,9 @@ export const TOOL_DETAILS = [
   },
 ];
 
-// ── Dashboard examples (screenshots from the workshop) ──
+// ── Dashboard examples (screenshots from the workshop, mapped to the tool
+//    each was built in, per the slides) ──
 export const DASHBOARD_EXAMPLES = [
-  {
-    img: "/examples/overview.jpg",
-    title: "Executive Overview",
-    tool: "Power BI",
-    caption: "A single-glance summary — total actions received across social media, calls and WhatsApp, with month-over-month comparisons.",
-  },
   {
     img: "/examples/performance.jpg",
     title: "Marketing Performance",
@@ -220,6 +215,71 @@ export const DASHBOARD_EXAMPLES = [
     title: "Sales & CRM Pipeline",
     tool: "Power BI",
     caption: "Lead pipeline health — proposal sources, lead stages, tiering, and commercial activity by employee.",
+  },
+  {
+    img: "/examples/overview.jpg",
+    title: "Operations Overview",
+    tool: "Zoho Analytics",
+    caption: "A single-glance summary — total actions received across social media, calls and WhatsApp, with period comparisons.",
+  },
+  {
+    img: "/examples/agency.jpg",
+    title: "Ad Performance Overview",
+    tool: "Agency Analytics",
+    caption: "Cross-platform ad performance — overall spend, leads, CPM, CTR and clicks, with spend and orders broken down by platform.",
+  },
+];
+
+// ── Platforms & data sources we integrate with ──
+export const INTEGRATIONS: { group: string; items: { name: string; icon: string }[] }[] = [
+  {
+    group: "Advertising",
+    items: [
+      { name: "Google Ads", icon: "google" },
+      { name: "Meta Ads", icon: "meta" },
+      { name: "TikTok Ads", icon: "tiktok" },
+      { name: "Snapchat Ads", icon: "snapchat" },
+      { name: "X Ads", icon: "x" },
+      { name: "LinkedIn Ads", icon: "linkedin" },
+    ],
+  },
+  {
+    group: "Social & Content",
+    items: [
+      { name: "Instagram", icon: "instagram" },
+      { name: "Facebook", icon: "facebook" },
+      { name: "TikTok", icon: "tiktok" },
+      { name: "YouTube", icon: "youtube" },
+      { name: "X (Twitter)", icon: "x" },
+      { name: "Pinterest", icon: "pinterest" },
+    ],
+  },
+  {
+    group: "Analytics & Search",
+    items: [
+      { name: "Google Analytics 4", icon: "google" },
+      { name: "Search Console", icon: "search" },
+      { name: "YouTube Analytics", icon: "youtube" },
+    ],
+  },
+  {
+    group: "Data Sources",
+    items: [
+      { name: "Google Sheets", icon: "sheets" },
+      { name: "Excel", icon: "excel" },
+      { name: "CSV", icon: "csv" },
+      { name: "Databases", icon: "database" },
+    ],
+  },
+  {
+    group: "E-commerce & CRM",
+    items: [
+      { name: "Shopify", icon: "shopify" },
+      { name: "Salla", icon: "cart" },
+      { name: "HubSpot", icon: "hubspot" },
+      { name: "Salesforce", icon: "salesforce" },
+      { name: "WhatsApp Business", icon: "whatsapp" },
+    ],
   },
 ];
 
