@@ -13,6 +13,7 @@ import {
   BENEFITS, KPI_STEPS, INTERPRET_STEPS, REPORTING_PRACTICES,
   TOOLS_TABLE, TOOL_DETAILS, SECTIONS,
 } from "./data";
+import { ToolLogo } from "./ToolLogo";
 
 const BENEFIT_ICONS: Record<string, React.ElementType> = {
   database: Database, timer: Timer, eye: Eye, zap: Zap, refresh: RefreshCw,
@@ -311,7 +312,14 @@ export default function Workshop() {
                 <tbody className="divide-y divide-border">
                   {TOOLS_TABLE.map((t) => (
                     <tr key={t.tool} className="hover:bg-muted/50 transition-colors">
-                      <td className="px-5 py-3.5 font-semibold text-foreground">{t.tool}</td>
+                      <td className="px-5 py-3.5 font-semibold text-foreground">
+                        <span className="inline-flex items-center gap-2.5">
+                          <span className="inline-flex items-center justify-center h-8 w-12 rounded-md bg-white border border-border shrink-0">
+                            <ToolLogo tool={t.tool} className="h-4" />
+                          </span>
+                          {t.tool}
+                        </span>
+                      </td>
                       <td className="px-5 py-3.5 text-muted-foreground">{t.type}</td>
                       <td className="px-5 py-3.5">
                         <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-[#5053C8]/10 text-[#5053C8] dark:text-[#BE98FF]">
@@ -332,8 +340,8 @@ export default function Workshop() {
             <Reveal key={t.name} delay={i * 0.06}>
               <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-card hover:shadow-card-hover transition-all">
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="w-10 h-10 rounded-xl gradient-brand flex items-center justify-center text-white font-bold">
-                    {t.n}
+                  <span className="h-12 min-w-[64px] px-3 rounded-xl bg-white border border-border flex items-center justify-center shrink-0">
+                    <ToolLogo tool={t.name} className="h-6" />
                   </span>
                   <h3 className="text-xl font-bold text-foreground">{t.name}</h3>
                 </div>
