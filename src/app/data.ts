@@ -201,10 +201,74 @@ export const TOOL_DETAILS = [
   },
 ];
 
+// ── Dashboard examples (screenshots from the workshop) ──
+export const DASHBOARD_EXAMPLES = [
+  {
+    img: "/examples/overview.jpg",
+    title: "Executive Overview",
+    tool: "Power BI",
+    caption: "A single-glance summary — total actions received across social media, calls and WhatsApp, with month-over-month comparisons.",
+  },
+  {
+    img: "/examples/performance.jpg",
+    title: "Marketing Performance",
+    tool: "Power BI",
+    caption: "Cost and lead performance — total cost, cost per lead, website vs native leads, and monthly activity trends.",
+  },
+  {
+    img: "/examples/crm.jpg",
+    title: "Sales & CRM Pipeline",
+    tool: "Power BI",
+    caption: "Lead pipeline health — proposal sources, lead stages, tiering, and commercial activity by employee.",
+  },
+];
+
+// ── Marketing Budget 2026 (from Marketing budget 2026.xlsx) ──
+export const BUDGET_TOTAL = 21765289; // SAR — Plan Marketing Budget 2026
+export const BUDGET_ONLINE = 7984533;
+export const BUDGET_OFFLINE = 13780756;
+
+export const BUDGET_BY_BRAND = [
+  { name: "NOLTE", value: 7320289 },
+  { name: "BQ KSA", value: 6200000 },
+  { name: "OPPEIN", value: 2200000 },
+  { name: "E-commerce", value: 1660000 },
+  { name: "Bed House", value: 1560000 },
+  { name: "LA-Z-BOY", value: 1380000 },
+  { name: "MAZWOOD", value: 1085000 },
+  { name: "BedZ", value: 360000 },
+];
+
+export const BUDGET_BY_MONTH = [
+  { name: "Jan", value: 630260 },
+  { name: "Feb", value: 3520545 },
+  { name: "Mar", value: 6302848 },
+  { name: "Apr", value: 781548 },
+  { name: "May", value: 831838 },
+  { name: "Jun", value: 879182 },
+  { name: "Jul", value: 837400 },
+  { name: "Aug", value: 824228 },
+  { name: "Sep", value: 3314489 },
+  { name: "Oct", value: 984045 },
+  { name: "Nov", value: 1392952 },
+  { name: "Dec", value: 1474954 },
+];
+
+// Online ad spend distribution by platform (actual, to date)
+export const BUDGET_BY_PLATFORM = [
+  { name: "META", value: 1299552, color: "#1877F2" },
+  { name: "Snap", value: 774183, color: "#E4B000" },
+  { name: "Google", value: 755625, color: "#34A853" },
+  { name: "TikTok", value: 658771, color: "#5053C8" },
+  { name: "X (Twitter)", value: 789, color: "#71767B" },
+];
+
 export const SECTIONS = [
   { id: "why", label: "Why Dashboards" },
   { id: "structure", label: "Structure & KPIs" },
   { id: "interpret", label: "Interpretation" },
   { id: "reporting", label: "Reporting" },
+  { id: "examples", label: "Examples" },
+  { id: "budget", label: "Budget 2026" },
   { id: "tools", label: "Tools" },
 ];

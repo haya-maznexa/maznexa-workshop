@@ -12,8 +12,41 @@ import {
 import {
   BENEFITS, KPI_STEPS, INTERPRET_STEPS, REPORTING_PRACTICES,
   TOOLS_TABLE, TOOL_DETAILS, SECTIONS,
+  DASHBOARD_EXAMPLES, BUDGET_TOTAL, BUDGET_ONLINE, BUDGET_OFFLINE,
+  BUDGET_BY_BRAND, BUDGET_BY_MONTH, BUDGET_BY_PLATFORM,
 } from "./data";
 import { ToolLogo } from "./ToolLogo";
+
+function fmtSAR(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(0)}K`;
+  return `${n}`;
+}
+
+// Animated horizontal bar
+function BudgetBar({ label, value, max, color = "#5053C8", delay = 0 }: {
+  label: string; value: number; max: number; color?: string; delay?: number;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-24 shrink-0 text-xs font-medium text-foreground truncate">{label}</span>
+      <div className="flex-1 h-7 rounded-lg bg-muted overflow-hidden">
+        <motion.div
+          className="h-full rounded-lg flex items-center justify-end px-2"
+          style={{ background: color }}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${Math.max((value / max) * 100, 4)}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay, ease: "easeOut" }}
+        >
+          <span className="text-[10px] font-semibold text-white whitespace-nowrap">
+            {fmtSAR(value)}
+          </span>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 const BENEFIT_ICONS: Record<string, React.ElementType> = {
   database: Database, timer: Timer, eye: Eye, zap: Zap, refresh: RefreshCw,
@@ -289,10 +322,169 @@ export default function Workshop() {
         </div>
       </section>
 
-      {/* ── 5. Tools ── */}
+      {/* ── Dashboard Examples ── */}
+      <section id="examples" className="max-w-6xl mx-auto px-5 py-20 scroll-mt-20">
+        <SectionHeading
+          eyebrow="05 · In practice"
+          title="Dashboard examples"
+          subtitle="Real dashboards we build and monitor — each one designed around a specific audience and decision."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {DASHBOARD_EXAMPLES.map((d, i) => (
+            <Reveal key={d.title} delay={i * 0.08}>
+              <div className="group h-full rounded-2xl border border-border bg-card overflow-hidden shadow-card hover:shadow-card-hover transition-all">
+                <div className="relative overflow-hidden bg-muted aspect-[16/9]">
+                  <Image
+                    src={d.img}
+                    alt={d.title}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="inline-flex items-center h-6 px-2 rounded-md bg-white border border-border">
+                      <ToolLogo tool={d.tool} className="h-3" />
+                    </span>
+                    <h3 className="font-semibold text-foreground">{d.title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{d.caption}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Budget Distribution 2026 ── */}
+      <section id="budget" className="scroll-mt-20 border-y border-border bg-muted/30">
+        <div className="max-w-6xl mx-auto px-5 py-20">
+          <SectionHeading
+            eyebrow="06 · Worked example"
+            title="Marketing Budget 2026 — distribution"
+            subtitle="A live example of turning a planning spreadsheet into clear, decision-ready views: where the budget goes by brand, by month, and by channel."
+          />
+
+          {/* Headline stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            {[
+              { k: `${fmtSAR(BUDGET_TOTAL)}`, v: "Total 2026 budget", sub: "SAR" },
+              { k: `${fmtSAR(BUDGET_OFFLINE)}`, v: "Offline budget", sub: `${Math.round((BUDGET_OFFLINE / BUDGET_TOTAL) * 100)}% of total` },
+              { k: `${fmtSAR(BUDGET_ONLINE)}`, v: "Online budget", sub: `${Math.round((BUDGET_ONLINE / BUDGET_TOTAL) * 100)}% of total` },
+              { k: `${BUDGET_BY_BRAND.length}`, v: "Brands funded", sub: "across the group" },
+            ].map((s, i) => (
+              <Reveal key={s.v} delay={i * 0.05}>
+                <div className="rounded-2xl border border-border bg-card px-5 py-6 h-full">
+                  <p className="text-3xl font-bold text-gradient">{s.k}</p>
+                  <p className="text-sm font-medium text-foreground mt-1">{s.v}</p>
+                  <p className="text-xs text-muted-foreground">{s.sub}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* By brand */}
+            <Reveal>
+              <div className="rounded-2xl border border-border bg-card p-6 h-full">
+                <h3 className="font-semibold text-foreground mb-1">Budget by Brand</h3>
+                <p className="text-xs text-muted-foreground mb-5">Plan marketing budget 2026 (SAR)</p>
+                <div className="space-y-2.5">
+                  {BUDGET_BY_BRAND.map((b, i) => (
+                    <BudgetBar
+                      key={b.name}
+                      label={b.name}
+                      value={b.value}
+                      max={BUDGET_BY_BRAND[0].value}
+                      color={i === 0 ? "#5053C8" : i === 1 ? "#6C6FD6" : "#BE98FF"}
+                      delay={i * 0.05}
+                    />
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* By platform + channel */}
+            <div className="space-y-6">
+              <Reveal>
+                <div className="rounded-2xl border border-border bg-card p-6">
+                  <h3 className="font-semibold text-foreground mb-1">Online spend by Platform</h3>
+                  <p className="text-xs text-muted-foreground mb-5">Actual online ad spend to date (SAR)</p>
+                  <div className="space-y-2.5">
+                    {BUDGET_BY_PLATFORM.map((p, i) => (
+                      <BudgetBar
+                        key={p.name}
+                        label={p.name}
+                        value={p.value}
+                        max={BUDGET_BY_PLATFORM[0].value}
+                        color={p.color}
+                        delay={i * 0.05}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <div className="rounded-2xl border border-border bg-card p-6">
+                  <h3 className="font-semibold text-foreground mb-4">Online vs Offline</h3>
+                  <div className="flex h-8 rounded-lg overflow-hidden">
+                    <motion.div
+                      className="gradient-brand flex items-center justify-center text-[11px] font-semibold text-white"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${(BUDGET_OFFLINE / BUDGET_TOTAL) * 100}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      Offline {Math.round((BUDGET_OFFLINE / BUDGET_TOTAL) * 100)}%
+                    </motion.div>
+                    <motion.div
+                      className="bg-[#BE98FF] flex items-center justify-center text-[11px] font-semibold text-white"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${(BUDGET_ONLINE / BUDGET_TOTAL) * 100}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                      Online {Math.round((BUDGET_ONLINE / BUDGET_TOTAL) * 100)}%
+                    </motion.div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* By month */}
+          <Reveal>
+            <div className="rounded-2xl border border-border bg-card p-6 mt-6">
+              <h3 className="font-semibold text-foreground mb-1">Budget by Month</h3>
+              <p className="text-xs text-muted-foreground mb-6">Plan marketing budget across 2026 (SAR) — note the campaign peaks in Mar &amp; Sep</p>
+              <div className="flex items-end justify-between gap-1.5 h-48">
+                {BUDGET_BY_MONTH.map((m, i) => {
+                  const maxM = Math.max(...BUDGET_BY_MONTH.map((x) => x.value));
+                  return (
+                    <div key={m.name} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
+                      <span className="text-[9px] text-muted-foreground font-medium">{fmtSAR(m.value)}</span>
+                      <motion.div
+                        className="w-full rounded-t-md gradient-brand"
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${(m.value / maxM) * 100}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: i * 0.04, ease: "easeOut" }}
+                      />
+                      <span className="text-[10px] text-muted-foreground">{m.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 7. Tools ── */}
       <section id="tools" className="max-w-6xl mx-auto px-5 py-20 scroll-mt-20">
         <SectionHeading
-          eyebrow="05 · Toolkit"
+          eyebrow="07 · Toolkit"
           title="Tools we use"
           subtitle="The platforms behind our monitoring and reporting — from full BI suites to AI-assisted interpretation."
         />
